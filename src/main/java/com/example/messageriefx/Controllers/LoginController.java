@@ -8,6 +8,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -43,7 +47,7 @@ public class LoginController implements Initializable {
         submitLogin.setOnAction(e-> {
             String username = username_fld.getText();
             String password = password_fld.getText();
-            if(IDandPassword.getLoginInfo().containsKey(username)){
+            /*if(IDandPassword.getLoginInfo().containsKey(username)){
                 String correctPassword = (String) IDandPassword.getLoginInfo().get(username);
                 if(password.equals(correctPassword)){
                     Stage stage = (Stage) errorField.getScene().getWindow();
@@ -55,6 +59,26 @@ public class LoginController implements Initializable {
             }
             else {
                 errorField.setText("user not found !!");
+            }*/
+            try {
+                String ur = "jdbc:mysql://localhost:3306/singin";
+                Connection con = DriverManager.getConnection(ur,"root","");
+                PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM clients WHERE PSEUDO = ? AND PASSWORD = ?");
+                stmt.setString(1,username);
+                stmt.setString(2,password);
+                ResultSet rss = stmt.executeQuery();
+                rss.next();
+                if(rss.getInt(1)>=1){
+                    Stage stage = (Stage) errorField.getScene().getWindow();
+                    onLogin();
+                    Model.getInstance().getViewFactory().closeStage(stage);
+                }else{
+                    errorField.setText("Password incorrect, try again!!");
+                }
+                stmt.close();
+                con.close();
+            }catch (Exception exp){
+                exp.printStackTrace();
             }
         });
     }

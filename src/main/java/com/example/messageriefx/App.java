@@ -12,5 +12,4 @@ public class App extends Application {
         Model.getInstance().getViewFactory().showLoginFrame();
         System.out.println("xdddsqsdq");
     }
-
 }

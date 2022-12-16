@@ -4,6 +4,7 @@ import com.example.messageriefx.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.sql.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +30,7 @@ public class SignINController implements Initializable {
             Model.getInstance().getViewFactory().closeStage(stage);
         });
         submitSignIN.setOnAction(e->{
-            if(username_fld.getText().equals("") || (password_fld.getText().equals(""))){
+            /*if(username_fld.getText().equals("") || (password_fld.getText().equals(""))){
                 error.setText("Username or password field empty !!");
                 return;
             }
@@ -46,6 +47,18 @@ public class SignINController implements Initializable {
                 password_lbl.setText("password (at least 8 chars !!)");
                 error.setText("the password is too short");
                 return;
+            }*/
+            try {
+                String ur = "jdbc:mysql://localhost:3306/singin";
+                Connection con = DriverManager.getConnection(ur,"root","");
+                PreparedStatement stmt = con.prepareStatement("INSERT INTO clients (PSEUDO,PASSWORD)VALUES(?,?)");
+                stmt.setString(1,username_fld.getText());
+                stmt.setString(2,password_fld.getText());
+                stmt.executeUpdate();
+                stmt.close();
+                con.close();
+            }catch (Exception exp){
+                exp.printStackTrace();
             }
             IDandPassword newPersone = new IDandPassword(username_fld.getText() , password_fld.getText());
 
