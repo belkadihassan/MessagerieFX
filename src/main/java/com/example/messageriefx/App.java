@@ -10,6 +10,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         Model.getInstance().getViewFactory().showLoginFrame();
+        System.out.println("xdd");
     }
 
 }
