@@ -36,3 +36,6 @@
     -fx-background-color : #003d00;
     -fx-text-fill : #fff;
 }
+.childPane{
+    -fx-background-color: #fff;
+}

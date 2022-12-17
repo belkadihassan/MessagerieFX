@@ -3,6 +3,7 @@ module com.example.messageriefx {
     requires javafx.fxml;
     requires de.jensd.fx.glyphs.fontawesome;
     requires com.dlsc.formsfx;
+    requires javafx.web;
 
     opens com.example.messageriefx to javafx.fxml;
 
