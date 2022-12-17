@@ -7,6 +7,7 @@
 }
 .addMailContainer{
     -fx-spacing : 4;
+    -fx-background-color : #ededed;
 }
 .addMailBtn{
     -fx-background-color : #003d00;
@@ -15,4 +16,23 @@
 }
 .addMailContainer Label{
     -fx-font-size : 1.1em;
+}
+.addMailHeader{
+    -fx-alignment : center;
+    -fx-spacing : 190;
+}
+.addMailHeader Button{
+    -fx-background : none;
+    -fx-text-fill : red;
+    -fx-font-size : 1.3em;
+    -fx-font-weight : bold;
+}
+.addMailHeader Label{
+    -fx-font-size : 1.1em;
+    -fx-text-fill : #003d00;
+    -fx-font-weight : 700;
+}
+.addEmail{
+    -fx-background-color : #003d00;
+    -fx-text-fill : #fff;
 }

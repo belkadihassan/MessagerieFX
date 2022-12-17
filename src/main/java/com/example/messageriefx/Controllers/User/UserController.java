@@ -16,6 +16,8 @@ public class UserController implements Initializable {
     public TextField inputMail;
     public PasswordField inputPsMail;
     public Button addMailBtn;
+    public Button exitAddMail;
+    public Button addEmail;
     private String username;
 
 
@@ -24,10 +26,21 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        addMailBtn.setOnAction(e->{
-            addMailBox.setVisible(false);
+        addMailBox.setVisible(false);
+        addEmail.setOnAction(e-> {
+            addMailBox.setVisible(true);
+            addEmail.setVisible(false);
         });
+        exitAddMail.setOnAction(e-> {
+            addMailBox.setVisible(false);
+            addEmail.setVisible(true);
+        });
+
+        addMailBtn.setOnAction(e-> {
+            Session.setEmail(inputMail.getText());
+
+        });
+
         btn.setOnAction(e->{
             String user_name = Session.getCurrentUser();
             this.setUsername(user_name);

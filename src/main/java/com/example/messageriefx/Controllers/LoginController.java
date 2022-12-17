@@ -1,8 +1,8 @@
 package com.example.messageriefx.Controllers;
 
-import com.example.messageriefx.Controllers.User.UserController;
+
 import com.example.messageriefx.Models.Model;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;

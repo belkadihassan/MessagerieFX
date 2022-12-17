@@ -30,8 +30,7 @@ public class ViewFactory {
         try {
             scene = new Scene(loader.load());
         }catch(Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("wtf");
+            System.out.println("scene not loaded");
             e.fillInStackTrace();
         }
         Stage stage = new Stage();
