@@ -2,16 +2,12 @@ package com.example.messageriefx.Views;
 
 import com.example.messageriefx.App;
 import com.example.messageriefx.Controllers.Session;
-import com.example.messageriefx.Controllers.SignINController;
-import com.example.messageriefx.Controllers.User.UserController;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
+import javafx.stage.Stage;
 
 public class ViewFactory {
     public ViewFactory(){}
@@ -20,7 +16,6 @@ public class ViewFactory {
         createStage(fxmlLoader , "Messagerie (Login)");
     }
     public void showUserUI(String username){
-        String name="def";
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/User/User.fxml"));
         Session.startSession(username);
         createStage(fxmlLoader , "Messagerie (home)");

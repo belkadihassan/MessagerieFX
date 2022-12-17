@@ -5,3 +5,14 @@
 .messagesList{
     -fx-background-color : #6ec071;
 }
+.addMailContainer{
+    -fx-spacing : 4;
+}
+.addMailBtn{
+    -fx-background-color : #003d00;
+    -fx-font-size : 1.3em;
+    -fx-text-fill : #fff;
+}
+.addMailContainer Label{
+    -fx-font-size : 1.1em;
+}

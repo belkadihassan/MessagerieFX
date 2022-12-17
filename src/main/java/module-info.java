@@ -9,4 +9,6 @@ module com.example.messageriefx {
     exports com.example.messageriefx;
     exports com.example.messageriefx.Controllers;
     exports com.example.messageriefx.Controllers.User;
+    exports com.example.messageriefx.Models;
+    exports com.example.messageriefx.Views;
 }
