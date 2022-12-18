@@ -1,9 +1,8 @@
 package com.example.messageriefx.Controllers.User;
 
 import com.example.messageriefx.Controllers.Session;
-import com.example.messageriefx.Controllers.email.RetrieveEmailsUsingIMAP;
-import com.example.messageriefx.Controllers.email.receive_message;
-import com.example.messageriefx.Controllers.email.send_email;
+import com.email.receive_message;
+import com.email.send_email;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -39,10 +38,6 @@ public class UserController implements Initializable {
     private String username;
     public static WebEngine engine;
     public static String to = "almahdi.achbab@etu.uae.ac.ma";
-    /* private WebEngine engine;*/
-    private static String port = "993";
-    private static String host = "imap.gmail.com";
-    private static String protocol = "imap";
 
     public void setUsername(String username) {this.username = username;}
     public String getUsername(){return username;}
@@ -90,16 +85,9 @@ public class UserController implements Initializable {
     public void clicking_receiving_message(MouseEvent mouseEvent) throws IOException, MessagingException {
         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
             if(mouseEvent.getClickCount() == 2){
-                /*Message.setVisible(false);
-                content.setVisible(true);*/
                 recent.setVisible(false);
                 messagesList.setVisible(false);
                 childPane.setVisible(true);
-                //System.out.println(receive_message.messages[1].getSubject());
-                //String a = receive_message.show_content_mail(messagesList.getSelectionModel().getSelectedIndex());
-               /* RetrieveEmailsUsingIMAP a = new RetrieveEmailsUsingIMAP();
-                String message = a.receivemessage(protocol, host, port, inputMail.getText(), inputPsMail.getText(),messagesList.getSelectionModel().getSelectedIndex());
-                System.out.println(message);*/
                 receive_message rm = new receive_message();
                 engine = webView.getEngine();
                 receive_message.index = messagesList.getSelectionModel().getSelectedIndex();
@@ -109,15 +97,6 @@ public class UserController implements Initializable {
                 rm.getNewEmails(inputMail.getText(),inputPsMail.getText(),messagesList);
                 fromLabel.setText(fromemail);
                 dateLabel.setText(String.valueOf(receive_message.messages[receive_message.index+1].getSentDate().getHours()+":"+receive_message.messages[receive_message.index+1].getSentDate().getMinutes()));
-                //System.out.println(messagesList.getSelectionModel().getSelectedIndex());
-                /*engine = webView.getEngine();
-                StringBuilder a= new StringBuilder();
-                a.append("<b>sdsqd</b>");
-                engine.loadContent(a.toString());*/
-                /*int index = Message.getSelectionModel().getSelectedIndex();
-                RetrieveEmailsUsingIMAP a = new RetrieveEmailsUsingIMAP();
-                String message = a.receivemessage(protocol, host, port, SIngUpController.from, SIngUpController.password,index,person_who_send,date_send);
-                engine.loadContent(message);*/
             }
         }
     }

@@ -76,8 +76,8 @@
    </VBox>
    <Button fx:id="addEmail" layoutX="883.0" layoutY="159.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" styleClass="addEmail" stylesheets="@../../Styles/user.css" text="Add E-Mail" />
    <Pane fx:id="parentPane" layoutX="147.0" layoutY="103.0" prefHeight="506.0" prefWidth="695.0">
-      <ListView fx:id="messagesList" layoutX="10.0" layoutY="50.0" prefHeight="455.0" prefWidth="674.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" />
-      <Label layoutX="25.0" layoutY="14.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00">
+      <ListView fx:id="messagesList" onMouseClicked="#clicking_receiving_message" layoutX="10.0" layoutY="50.0" prefHeight="455.0" prefWidth="674.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" />
+      <Label layoutX="25.0" fx:id="recent" layoutY="14.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00">
          <font>
             <Font size="14.0" />
          </font></Label>

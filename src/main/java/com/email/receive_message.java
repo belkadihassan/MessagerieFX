@@ -1,4 +1,4 @@
-package com.example.messageriefx.Controllers.email;
+package com.email;
 
 import com.example.messageriefx.Controllers.User.UserController;
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -27,6 +27,7 @@ public class receive_message {
     private static final String protocol = "imap";
     public static Message[] messages;
     public static Message[] mess;
+    public static Folder fd;
     public static int index;
     public static boolean checkcontentemail = false;
     public static class HBoxCell extends HBox {
@@ -124,6 +125,7 @@ public class receive_message {
                     store.connect(userName, password);
                     Folder inbox = store.getFolder("INBOX");
                     inbox.open(Folder.READ_WRITE);
+                    fd = inbox;
                     int c = inbox.getMessageCount();
                     mess = inbox.getMessages(1,c);
 

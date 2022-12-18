@@ -1,15 +1,12 @@
-package com.example.messageriefx.Controllers.email;
+package com.email;
 
-import javafx.application.Platform;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.Session;
 
 public class send_email implements Runnable {
     public static final String host = "smtp.gmail.com";

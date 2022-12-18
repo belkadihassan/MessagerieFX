@@ -1,6 +1,4 @@
-package com.example.messageriefx.Controllers.email;
-
-import javafx.scene.control.Label;
+package com.email;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -41,10 +39,6 @@ public class RetrieveEmailsUsingIMAP {
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
 
-            /*int count = inbox.getMessageCount();
-            System.out.println("You have "+count+" emails in your inbox.");
-            Message[] messages = inbox.getMessages(1, count);
-            System.out.println(receive_message.messages.length);*/
             FileInputStream filee = new FileInputStream("Person.bin");
             ObjectInputStream in = new ObjectInputStream(filee);
             Message[] P = (Message[]) in.readObject();

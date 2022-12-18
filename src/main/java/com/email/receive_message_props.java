@@ -1,4 +1,4 @@
-package com.example.messageriefx.Controllers.email;
+package com.email;
 
 import java.util.Properties;
 
