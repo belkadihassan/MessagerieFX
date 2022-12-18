@@ -4,6 +4,8 @@ module com.example.messageriefx {
     requires de.jensd.fx.glyphs.fontawesome;
     requires com.dlsc.formsfx;
     requires javafx.web;
+    requires java.mail;
+    requires org.jsoup;
 
     opens com.example.messageriefx to javafx.fxml;
 
