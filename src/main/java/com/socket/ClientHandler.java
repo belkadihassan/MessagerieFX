@@ -1,79 +1,130 @@
 package com.socket;
 
-import com.example.messageriefx.Controllers.Session;
-import com.example.messageriefx.Controllers.User.UserController;
-import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ClientHandler implements Runnable{
-    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
+public class ClientHandler implements Runnable {
     private Socket socket;
-    private ObjectOutputStream objectOutputStream;
-    private ObjectInputStream objectInputStream;
     private String username;
     private String room;
-    public ClientHandler(Socket socket){
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
+    private static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
-        try{
-            this.socket = socket;
-            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
+    public ClientHandler(Socket socket) throws IOException, ClassNotFoundException {
+        this.socket = socket;
+        this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        this.objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            this.username = Session.getCurrentUser();
-            clientHandlers.add(this);
-            broadcastMessage(new Message("SERVER : "+this.username+ " has entered the chat",Message.From.SERVER,username,"world cup"));
-        }catch (IOException e){
-            closeEverything(socket,objectInputStream,objectOutputStream);
+        // Read client username
+        Demande d1 = (Demande) objectInputStream.readObject();
+        username = (String) d1.getNewValue();
+
+        // Read room id
+        Demande d2 = (Demande) objectInputStream.readObject();
+        room = (String) d2.getNewValue();
+
+        // Add client to the clients list
+        clientHandlers.add(this);
+    }
+
+    /**
+     * Send message
+     * @param message Message
+     * @return Returns true if the message was sent successfully
+     */
+    public boolean sendMessage(Message message) {
+        try {
+            objectOutputStream.writeObject(message);
+            return true;
+        } catch (IOException e) {
+            close();
+        }
+
+        return false;
+    }
+
+    public void broadcastMessage(Message message) {
+        if (message.getRoom() == null) {
+            // Send message to all clients
+            for (ClientHandler c : clientHandlers) {
+                if (c != this) {
+                    c.sendMessage(message);
+                }
+            }
+        } else {
+            // Send message to the room
+            for (ClientHandler c : clientHandlers) {
+                if (c != this && c.getRoom().equals(this.room)) {
+                    c.sendMessage(message);
+                }
+            }
         }
     }
 
     @Override
     public void run() {
-        Message messageFromClient;
-        while (socket.isConnected()){
-            try{
-                messageFromClient = (Message) objectInputStream.readObject();
+        broadcastMessage(new Message("server", username + " joins the room", room, Message.From.SERVER));
 
-            } catch (IOException e) {
-                closeEverything(socket,objectInputStream,objectOutputStream);
-                break;
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-    public void broadcastMessage(Message message){
-        for(ClientHandler clientHandler:clientHandlers){
+        Transfert transferredContent;
+
+        while (socket.isConnected()) {
             try {
-                if(!clientHandler.username.equals(this.username)){
-                    objectOutputStream.writeObject(message);
-                    objectOutputStream.flush();
+                transferredContent = (Transfert) objectInputStream.readObject();
+
+                if (transferredContent instanceof Message) {
+                    broadcastMessage((Message) transferredContent);
                 }
-            }
-            catch(IOException e){
-                closeEverything(socket,objectInputStream,objectOutputStream);
+
+                if (transferredContent instanceof Demande) {
+                    String newValue = (String) ((Demande) transferredContent).getNewValue();
+
+                    switch (((Demande) transferredContent).getType()) {
+                        case SET_ROOM -> setRoom(newValue);
+                        case SET_USERNAME -> setUsername(newValue);
+                    }
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                close();
+                break;
             }
         }
     }
-    public void removeClientHandler(){
+
+    public void close() {
         clientHandlers.remove(this);
-        String message = "SERVER : " + this.username + " has left the chat";
-        broadcastMessage(new Message(message , Message.From.SERVER , username,"world cup"));
-    }
-    public void closeEverything(Socket socket,ObjectInputStream ois,ObjectOutputStream oos){
-        removeClientHandler();
-        try{
-            if (socket!=null) socket.close();
-            if (ois!=null) ois.close();
-            if(oos!=null) oos.close();
-        }catch (IOException e){
-            e.getStackTrace();
+        broadcastMessage(new Message("server", username + " leaves the room", room, Message.From.SERVER));
+
+        try {
+            if (objectInputStream != null)
+                objectInputStream.close();
+            if (objectOutputStream != null)
+                objectOutputStream.close();
+            if (socket != null)
+                socket.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    private Message createMessage(String msg) {
+        return new Message(username, msg, room, Message.From.SERVER);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 }

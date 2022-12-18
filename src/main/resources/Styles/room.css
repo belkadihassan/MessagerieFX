@@ -1,0 +1,24 @@
+.detailsArea{
+    -fx-background-color : #fff;
+}
+.conversationArea{
+    -fx-background-color : #F2F1F1;
+}
+.convFooter{
+    -fx-spacing : 20;
+    -fx-background-radius : 50px;
+    -fx-background-color : #fff;
+}
+.convFooter Button{
+    -fx-background-radius : 50px;
+    -fx-background-color : #003d00;
+}
+.messageToSend{
+    -fx-background-radius : 50px;
+    -fx-background : none;
+    -fx-focus-color: none;
+}
+
+.detailsContainer : {
+    -fx-alignment : CENTER;
+}
