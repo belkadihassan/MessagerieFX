@@ -3,24 +3,46 @@ package com.socket;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Message implements Serializable {
+public class Message extends Transfert {
+    private static final long serialVersionUID = -5399605122490343339L;
 
-    public enum From{SERVER,CLIENT};
-    private String content;
-    private LocalDateTime date;
+    public enum From { SERVER, CLIENT }
+
+    private String message;
+
     private From from;
-    private String room;
-    private String username;
 
-    public Message(String content,From from,String username,String room){
-        this.content = content;
-        this.from = from;
-        this.username = username;
-        this.room = room;
-        this.date = LocalDateTime.now();
+    private LocalDateTime date;
+
+    public String getMessage() {
+        return message;
     }
-    public LocalDateTime getDate(){return this.date;}
-    public String getUsername(){return this.username;}
-    public String getRoom(){return this.room;}
-    public String getContent(){return this.content;}
+
+    public Message(String username, String message, String room, From from) {
+        this(username, message, room, from, LocalDateTime.now());
+    }
+
+    public Message(String username, String message, String room, From from, LocalDateTime date) {
+        super(username, room);
+        this.message = message;
+        this.from = from;
+        this.date = date;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public From getFrom() {
+        return from;
+    }
+
+    @Override
+    public String toString() {
+        return "Username: " + username
+                + "\nRoom: " + room
+                + "\nMessage" + message
+                + "\nSend date: " + date
+                + "\nFrom: " + from;
+    }
 }

@@ -1,38 +1,47 @@
 package com.socket;
 
 import java.io.IOException;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
     private ServerSocket serverSocket;
-    public Server(ServerSocket serverSocket){
+
+    public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
-    public void startServer(){
-        try{
-            while (!serverSocket.isClosed()){
-                Socket socket = serverSocket.accept();
-                System.out.println("a new client has connected");
+
+    public void start() {
+        try {
+            while (!serverSocket.isClosed()) {
+                Socket socket = serverSocket.accept(); // Waiting for client connexion
                 ClientHandler clientHandler = new ClientHandler(socket);
-                Thread thread = new Thread(clientHandler);
+                new Thread(clientHandler).start();
             }
-        }catch(IOException e){
-
-        }
-    }
-    public void closeServerSocket(){
-        try{
-            if(serverSocket!= null)serverSocket.close();
-        }catch(IOException e){
-            e.getStackTrace();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("error: " + e.getMessage());
+            end();
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(1234);
-        Server server = new Server(serverSocket);
-        server.startServer();
+    public void end() {
+        try {
+            if (this.serverSocket != null)
+                this.serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("error: " + e.getMessage());
+        }
     }
 
+    public static void main(String[] args) {
+        Server s = null;
+        try {
+            s = new Server(new ServerSocket(1111));
+            s.start();
+        } catch (IOException e) {
+            if (s != null) s.end();
+            System.out.println("error: " + e.getMessage());
+        }
+    }
 }
