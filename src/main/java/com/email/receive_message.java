@@ -1,4 +1,4 @@
-package com.example.messageriefx.Controllers.email;
+package com.email;
 
 import com.example.messageriefx.Controllers.User.UserController;
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -109,24 +109,25 @@ public class receive_message {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                MailSSLSocketFactory socketFactory= null;
-                try {
-                    socketFactory = new MailSSLSocketFactory();
-                } catch (GeneralSecurityException e) {
-                    throw new RuntimeException(e);
-                }
-                socketFactory.setTrustAllHosts(true);
-                properties.put("mail.imaps.ssl.socketFactory", socketFactory);
+                
                 Session session = Session.getDefaultInstance(properties);
 
                 try {
                     Store store = session.getStore(protocol);
                     store.connect(userName, password);
-                    Folder inbox = store.getFolder("INBOX");
+                    Folder inbox = store.getFolder("[Gmail]/Trash");
                     inbox.open(Folder.READ_WRITE);
                     int c = inbox.getMessageCount();
                     mess = inbox.getMessages(1,c);
+                    Folder[] f = store.getDefaultFolder().list();
+                    for(Folder fd:f){
+                        Folder t[]=fd.list();
 
+                        System.out.println("-------"+fd.getName()+"------");
+                        for(Folder f1:t)
+                            System.out.println("->"+f1.getName());
+
+                    }
                     Flags seen = new Flags(Flags.Flag.SEEN);
                     FlagTerm unseenFlagTerm = new FlagTerm(seen, false);
                     Message messagesunseen[] = inbox.search(unseenFlagTerm);

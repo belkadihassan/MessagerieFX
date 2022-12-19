@@ -1,5 +1,8 @@
-package com.example.messageriefx.Controllers.email;
+package com.email;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import java.security.GeneralSecurityException;
 import java.util.Properties;
 
 public class receive_message_props {
@@ -21,6 +24,14 @@ public class receive_message_props {
                 String.format("mail.%s.socketFactory.port",
                         protocol), String.valueOf(port));
         properties.put("mail.imap.ssl.protocols", "TLSv1.2");
+        MailSSLSocketFactory socketFactory= null;
+        try {
+            socketFactory = new MailSSLSocketFactory();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+        socketFactory.setTrustAllHosts(true);
+        properties.put("mail.imaps.ssl.socketFactory", socketFactory);
         return properties;
     }
 }
