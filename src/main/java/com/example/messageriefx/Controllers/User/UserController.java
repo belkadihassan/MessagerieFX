@@ -22,13 +22,6 @@ public class UserController implements Initializable {
 
     public ListView messagesList;
     public WebView webView;
-    public Button btn;
-    public VBox addMailBox;
-    public TextField inputMail;
-    public PasswordField inputPsMail;
-    public Button addMailBtn;
-    public Button exitAddMail;
-    public Button addEmail;
     public Pane childPane;
     public Pane parentPane;
     public Label dateLabel;

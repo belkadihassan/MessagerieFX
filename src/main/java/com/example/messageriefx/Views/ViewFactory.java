@@ -20,9 +20,9 @@ public class ViewFactory {
         Session.startSession(username);
         createStage(fxmlLoader , "Messagerie (home)");
     }
-    public void showSignINFrame(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/SignIN/SignIN.fxml"));
-        createStage(fxmlLoader , "Messagerie (signIN)");
+    public void showRoomFrame(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/User/Room.fxml"));
+        createStage(fxmlLoader , "Room");
     }
 
     public void createStage(FXMLLoader loader , String title){

@@ -33,6 +33,7 @@ public class send_email implements Runnable {
                             throw new RuntimeException(e);
                         }
                     }
+            System.out.println("connection succes");
 
         }catch (AddressException a){
             System.out.println("adress n'exist pas");

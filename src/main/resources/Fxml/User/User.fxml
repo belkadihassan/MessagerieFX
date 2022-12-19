@@ -4,19 +4,16 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="655.0" prefWidth="1275.0" styleClass="container" stylesheets="@../../Styles/user.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.messageriefx.Controllers.User.UserController">
-   <VBox prefHeight="655.0" prefWidth="99.0" styleClass="menuBar" stylesheets="@../../Styles/user.css" AnchorPane.leftAnchor="0.0">
+<AnchorPane prefHeight="655.0" prefWidth="1159.0" styleClass="container" stylesheets="@../../Styles/user.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.messageriefx.Controllers.User.UserController">
+   <VBox prefHeight="655.0" prefWidth="174.0" styleClass="menuBar" stylesheets="@../../Styles/user.css" AnchorPane.leftAnchor="0.0">
       <ImageView fitHeight="64.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/R.png" />
@@ -24,67 +21,33 @@
       </ImageView>
       <VBox prefHeight="280.0" prefWidth="99.0" styleClass="navbar" stylesheets="@../../Styles/user.css">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Get a Roum">
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Get a Roum">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Send aMail" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="About" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="exit App" />
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Send aMail" />
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="About" />
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="exit App" />
          </children>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
       </VBox>
-
-
-      <Button fx:id="btn" text="get Username" />
       <padding>
          <Insets top="30.0" />
       </padding>
    </VBox>
-   <VBox fx:id="addMailBox" layoutX="883.0" layoutY="188.0" prefHeight="305.0" prefWidth="360.0" styleClass="addMailContainer" stylesheets="@../../Styles/user.css">
-      <opaqueInsets>
-         <Insets />
-      </opaqueInsets>
-      <padding>
-         <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
-      </padding>
-      <HBox prefHeight="27.0" prefWidth="300.0" styleClass="addMailHeader" stylesheets="@../../Styles/user.css">
-         <Label text="Add e-mail">
-            <HBox.margin>
-               <Insets left="10.0" />
-            </HBox.margin>
-         </Label>
-         <Button fx:id="exitAddMail" mnemonicParsing="false" text="x" />
-         <VBox.margin>
-            <Insets bottom="15.0" />
-         </VBox.margin>
-      </HBox>
-      <Label text="e-mail" />
-      <TextField fx:id="inputMail" prefHeight="36.0" styleClass="inputMail" stylesheets="@../../Styles/user.css">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </TextField>
-      <Label text="password" />
-      <PasswordField fx:id="inputPsMail" prefHeight="36.0" prefWidth="300.0" styleClass="inputPsMail" stylesheets="@../../Styles/user.css">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin>
-      </PasswordField>
-      <Button fx:id="addMailBtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="308.0" styleClass="addMailBtn" stylesheets="@../../Styles/user.css" text="add e-mail" />
-      <Label fx:id="addMailError" text="Error" wrapText="true" />
-   </VBox>
-   <Button fx:id="addEmail" layoutX="883.0" layoutY="159.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="114.0" styleClass="addEmail" stylesheets="@../../Styles/user.css" text="Add E-Mail" />
-   <Pane fx:id="parentPane" layoutX="147.0" layoutY="103.0" prefHeight="506.0" prefWidth="695.0">
-      <ListView fx:id="messagesList" onMouseClicked="#clicking_receiving_message" layoutX="10.0" layoutY="50.0" prefHeight="455.0" prefWidth="674.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" />
-      <Label layoutX="25.0" fx:id="recent" layoutY="14.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00">
+   <Pane fx:id="parentPane" layoutX="238.0" layoutY="103.0" prefHeight="512.0" prefWidth="869.0">
+      <ListView fx:id="messagesList" layoutX="4.0" layoutY="50.0" onMouseClicked="#clicking_receiving_message" prefHeight="455.0" prefWidth="844.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" visible="false" />
+      <Label fx:id="recent" layoutX="25.0" layoutY="14.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00" visible="false">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Pane fx:id="childPane" layoutY="-2.0" prefHeight="506.0" prefWidth="695.0" styleClass="childPane" stylesheets="@../../Styles/user.css" visible="false">
-         <Label fx:id="fromLabel" layoutX="27.0" layoutY="14.0" prefHeight="46.0" prefWidth="174.0" text="Sobject" />
-         <WebView fx:id="webView" layoutX="10.0" layoutY="71.0" prefHeight="435.0" prefWidth="674.0" />
-         <Label fx:id="dateLabel" layoutX="502.0" layoutY="25.0" prefHeight="25.0" prefWidth="114.0" text="DATE" />
+      <Pane fx:id="childPane" layoutX="-3.0" layoutY="25.0" prefHeight="506.0" prefWidth="856.0" styleClass="childPane" stylesheets="@../../Styles/user.css">
+         <Label fx:id="fromLabel" layoutX="65.0" layoutY="15.0" prefHeight="46.0" prefWidth="174.0" text="Sobject" />
+         <WebView fx:id="webView" layoutX="65.0" layoutY="91.0" prefHeight="415.0" prefWidth="724.0" />
+         <Label fx:id="dateLabel" layoutX="774.0" layoutY="26.0" prefHeight="25.0" prefWidth="114.0" text="DATE" />
       </Pane>
    </Pane>
 </AnchorPane>

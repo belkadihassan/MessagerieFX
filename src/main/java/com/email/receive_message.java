@@ -27,6 +27,7 @@ public class receive_message {
     private static final String protocol = "imap";
     public static Message[] messages;
     public static Message[] mess;
+    public static Folder fd;
     public static int index;
     public static boolean checkcontentemail = false;
     public static class HBoxCell extends HBox {
@@ -152,7 +153,9 @@ public class receive_message {
                         } catch ( MessagingException e ) {
                             throw new RuntimeException( e );
                         }
-                    } );
+                    }
+                    );
+
                     if(checkcontentemail){
                         Platform.runLater(new Runnable() {
                             @Override
