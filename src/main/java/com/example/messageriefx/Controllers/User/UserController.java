@@ -1,5 +1,6 @@
 package com.example.messageriefx.Controllers.User;
 
+import com.example.messageriefx.Controllers.LoginController;
 import com.example.messageriefx.Controllers.Session;
 import com.email.receive_message;
 import com.email.send_email;
@@ -40,6 +41,8 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        receive_message rm = new receive_message();
+        rm.getNewEmails(LoginController.mailuser,LoginController.passuser,messagesList);
 
         backToMessages_btn.setVisible(false);
         childPane.setVisible(false);
@@ -50,8 +53,7 @@ public class UserController implements Initializable {
             backToMessages_btn.setVisible(false);
         });
 
-
-        addMailBtn.setOnAction(e-> {
+        /*addMailBtn.setOnAction(e-> {
             Session.setEmail(inputMail.getText());
             Thread account_sender = new Thread(new send_email(inputMail.getText(),inputPsMail.getText(),to));
             try {
@@ -67,7 +69,7 @@ public class UserController implements Initializable {
             } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
-        });
+        });*/
 
     }
     public void clicking_receiving_message(MouseEvent mouseEvent) throws IOException, MessagingException {
@@ -82,7 +84,7 @@ public class UserController implements Initializable {
                 receive_message.checkcontentemail = true;
                 Address[] fromAddresses = receive_message.messages[receive_message.index+1].getFrom();
                 String fromemail= fromAddresses[0].toString();
-                rm.getNewEmails(inputMail.getText(),inputPsMail.getText(),messagesList);
+                //rm.getNewEmails(inputMail.getText(),inputPsMail.getText(),messagesList);
                 fromLabel.setText(fromemail);
                 dateLabel.setText(String.valueOf(receive_message.messages[receive_message.index+1].getSentDate().getHours()+":"+receive_message.messages[receive_message.index+1].getSentDate().getMinutes()));
             }

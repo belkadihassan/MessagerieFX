@@ -1,5 +1,6 @@
 package com.email;
 
+import com.example.messageriefx.Controllers.LoginController;
 import com.example.messageriefx.Controllers.User.UserController;
 import com.sun.mail.util.MailSSLSocketFactory;
 import javafx.application.Platform;
@@ -16,10 +17,7 @@ import javax.mail.search.FlagTerm;
 import java.io.*;
 import java.security.GeneralSecurityException;
 import java.text.DateFormatSymbols;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Properties;
+import java.util.*;
 
 public class receive_message {
     private static final String port = "993";
@@ -107,11 +105,20 @@ public class receive_message {
     public void getNewEmails(String userName, String password, ListView<HBoxCell> Lists) {
         Properties properties = receive_message_props.getServerProperties(protocol,
                 host, port);
+
+        MailSSLSocketFactory socketFactory= null;
+        try {
+            socketFactory = new MailSSLSocketFactory();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+        socketFactory.setTrustAllHosts(true);
+        properties.put("mail.imaps.ssl.socketFactory", socketFactory);
+        Session session = Session.getDefaultInstance(properties);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 
-                Session session = Session.getDefaultInstance(properties);
 
                 try {
                     Store store = session.getStore(protocol);
