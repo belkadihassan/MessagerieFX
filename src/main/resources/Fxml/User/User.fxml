@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +20,12 @@
             <Image url="@../../images/R.png" />
          </image>
       </ImageView>
-      <VBox prefHeight="280.0" prefWidth="99.0" styleClass="navbar" stylesheets="@../../Styles/user.css">
+      <Label text="Java mail" textFill="#003d00">
+         <font>
+            <Font name="Segoe UI Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <VBox prefHeight="210.0" prefWidth="174.0" styleClass="navbar" stylesheets="@../../Styles/user.css">
          <children>
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Get a Roum">
                <opaqueInsets>
@@ -31,23 +37,60 @@
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="exit App" />
          </children>
          <VBox.margin>
-            <Insets top="40.0" />
+            <Insets />
          </VBox.margin>
       </VBox>
+      <Label text="Dossiers : " textFill="#003d00">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </Label>
+      <ScrollPane prefHeight="192.0" prefWidth="174.0">
+         <content>
+            <VBox fx:id="foldersBox" prefHeight="198.0" prefWidth="159.0" styleClass="navbar">
+               <padding>
+                  <Insets left="14.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
       <padding>
          <Insets top="30.0" />
       </padding>
    </VBox>
    <Pane fx:id="parentPane" layoutX="238.0" layoutY="103.0" prefHeight="512.0" prefWidth="869.0">
-      <ListView fx:id="messagesList" layoutX="4.0" layoutY="50.0" onMouseClicked="#clicking_receiving_message" prefHeight="455.0" prefWidth="844.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" visible="false" />
-      <Label fx:id="recent" layoutX="25.0" layoutY="14.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Pane fx:id="childPane" layoutX="-3.0" layoutY="25.0" prefHeight="506.0" prefWidth="856.0" styleClass="childPane" stylesheets="@../../Styles/user.css">
-         <Label fx:id="fromLabel" layoutX="65.0" layoutY="15.0" prefHeight="46.0" prefWidth="174.0" text="Sobject" />
-         <WebView fx:id="webView" layoutX="65.0" layoutY="91.0" prefHeight="415.0" prefWidth="724.0" />
-         <Label fx:id="dateLabel" layoutX="774.0" layoutY="26.0" prefHeight="25.0" prefWidth="114.0" text="DATE" />
+      <ListView fx:id="messagesList" layoutX="4.0" layoutY="50.0" onMouseClicked="#clicking_receiving_message" prefHeight="455.0" prefWidth="844.0" styleClass="messagesList" stylesheets="@../../Styles/user.css" />
+      <Pane fx:id="childPane" layoutX="-3.0" layoutY="-1.0" prefHeight="532.0" prefWidth="856.0" styleClass="childPane" stylesheets="@../../Styles/user.css" visible="false">
+         <WebView fx:id="webView" layoutX="29.0" layoutY="91.0" prefHeight="415.0" prefWidth="797.0" />
+         <Pane fx:id="messageContentHeader" layoutX="-1.0" prefHeight="90.0" prefWidth="856.0" styleClass="MessageContentHeader">
+            <children>
+               <Label fx:id="dateLabel" layoutX="807.0" layoutY="33.0" prefHeight="25.0" text="DATE" />
+               <Label fx:id="fromLabel" layoutX="23.0" layoutY="22.0" prefHeight="46.0" prefWidth="174.0" text="Sobject">
+                  <font>
+                     <Font name="SansSerif Regular" size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </Pane>
+      </Pane>
+      <Pane fx:id="messagesHeader" layoutX="-3.0" prefHeight="46.0" prefWidth="856.0" styleClass="messagesHeader" stylesheets="@../../Styles/user.css">
+         <children>
+            <Label fx:id="recent" layoutX="43.0" layoutY="6.0" prefHeight="31.0" prefWidth="121.0" text="Recent Messages" textFill="#003d00">
+               <font>
+                  <Font name="Segoe UI Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="refresh" accessibleRole="BUTTON" fitHeight="19.0" fitWidth="18.0" layoutX="815.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/Refpng.png" />
+               </image>
+            </ImageView>
+         </children>
       </Pane>
    </Pane>
+   <Button fx:id="backToMessages_btn" layoutX="995.0" layoutY="64.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="backToMessages_btn" stylesheets="@../../Styles/user.css" text="&lt; Back" textFill="WHITE" visible="false">
+      <font>
+         <Font name="Microsoft YaHei UI" size="14.0" />
+      </font>
+   </Button>
 </AnchorPane>

@@ -2,7 +2,10 @@
     -fx-background-color : #fff;
 }
 .conversationArea{
-    -fx-background-color : #F2F1F1;
+    -fx-background-color : #ddd;
+}
+.convFooter ImageView{
+    -fx-background-color : #003d00;
 }
 .convFooter{
     -fx-spacing : 20;
