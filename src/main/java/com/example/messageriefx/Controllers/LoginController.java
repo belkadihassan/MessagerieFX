@@ -5,7 +5,7 @@ import com.example.messageriefx.Models.Model;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,11 +13,14 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     public Label username_lbl;
     public TextField username_fld;
+    public TextField email_fld;
+    public TextField room_fld;
+    public PasswordField mailPassword_fld;
     public Label password_lbl;
-    public PasswordField password_fld;
-    public Hyperlink signINLink;
     public Button submitLogin;
-    public Label errorField;
+    public Button submitLoginMail;
+    public Label errorField1;
+    public Label errorField2;
 
     public String getUsername(){
         return username_fld.getText();
@@ -29,33 +32,18 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        errorField.setText("");
+        errorField1.setText("");
+        errorField2.setText("");
 
-        IDandPassword idp2 = new IDandPassword("hassan" , "ehh");
-        IDandPassword idp3 = new IDandPassword("afkir" , "zekek");
-
-        signINLink.setOnAction(e->{
-            Stage stage = (Stage) errorField.getScene().getWindow();
-            Model.getInstance().getViewFactory().showSignINFrame();
-            Model.getInstance().getViewFactory().closeStage(stage);
-        });
 
         submitLogin.setOnAction(e-> {
             String username = username_fld.getText();
-            String password = password_fld.getText();
-            if(IDandPassword.getLoginInfo().containsKey(username)){
-                String correctPassword = (String) IDandPassword.getLoginInfo().get(username);
-                if(password.equals(correctPassword)){
-                    Stage stage = (Stage) errorField.getScene().getWindow();
-                    onLogin();
-                    Model.getInstance().getViewFactory().closeStage(stage);
-                }else {
-                    errorField.setText("Password incorrect, try again!!");
-                }
-            }
-            else {
-                errorField.setText("user not found !!");
-            }
+            String room = room_fld.getText();
+
+        });
+
+        submitLoginMail.setOnAction(e->{
+            /* ndad nanak a mehdi */
         });
     }
 }

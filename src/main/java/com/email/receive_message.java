@@ -125,7 +125,6 @@ public class receive_message {
                     store.connect(userName, password);
                     Folder inbox = store.getFolder("INBOX");
                     inbox.open(Folder.READ_WRITE);
-                    fd = inbox;
                     int c = inbox.getMessageCount();
                     mess = inbox.getMessages(1,c);
 
@@ -153,7 +152,9 @@ public class receive_message {
                         } catch ( MessagingException e ) {
                             throw new RuntimeException( e );
                         }
-                    } );
+                    }
+                    );
+
                     if(checkcontentemail){
                         Platform.runLater(new Runnable() {
                             @Override
