@@ -42,7 +42,7 @@
             <HBox alignment="CENTER_RIGHT" layoutX="22.0" layoutY="383.0" prefHeight="39.0" prefWidth="436.0" styleClass="convFooter" stylesheets="@../../Styles/room.css">
                <children>
                   <TextField prefHeight="39.0" prefWidth="340.0" promptText="write here ....." styleClass="messageToSend" stylesheets="@../../Styles/room.css" />
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" text="send" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="56.0" text="send" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </HBox.margin>

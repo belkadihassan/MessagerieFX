@@ -5,6 +5,7 @@ import com.email.receive_message;
 import com.email.send_email;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,14 +21,16 @@ import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
 
+    public VBox foldersBox;
+    public ImageView refresh;
     public ListView messagesList;
     public WebView webView;
     public Pane childPane;
     public Pane parentPane;
     public Label dateLabel;
     public Label fromLabel;
-    public Label addMailError; /*recent Messages*/
-    public Label recent;
+    public Label recent;        /*recent Messages*/
+    public Button backToMessages_btn;
     private String username;
     public static WebEngine engine;
     public static String to = "almahdi.achbab@etu.uae.ac.ma";
@@ -38,18 +41,15 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        backToMessages_btn.setVisible(false);
         childPane.setVisible(false);
 
-        addMailError.setVisible(false);
-        addMailBox.setVisible(false);
-        addEmail.setOnAction(e-> {
-            addMailBox.setVisible(true);
-            addEmail.setVisible(false);
+        childPane.setVisible(false);
+        backToMessages_btn.setOnAction(e->{
+            childPane.setVisible(false);
+            backToMessages_btn.setVisible(false);
         });
-        exitAddMail.setOnAction(e-> {
-            addMailBox.setVisible(false);
-            addEmail.setVisible(true);
-        });
+
 
         addMailBtn.setOnAction(e-> {
             Session.setEmail(inputMail.getText());
@@ -69,11 +69,6 @@ public class UserController implements Initializable {
             }
         });
 
-        btn.setOnAction(e->{
-            String user_name = Session.getCurrentUser();
-            this.setUsername(user_name);
-            System.out.println("username : " + this.username);
-        });
     }
     public void clicking_receiving_message(MouseEvent mouseEvent) throws IOException, MessagingException {
         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){

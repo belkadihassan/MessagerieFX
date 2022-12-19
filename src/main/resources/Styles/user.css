@@ -5,7 +5,9 @@
     -fx-alignment : TOP-center;
     -fx-spacing : 20;
 }
+
 .navbar{
+    -fx-background-color : #d1d1d1;
     -fx-alignment : center;
     -fx-spacing : 20;
 }
@@ -14,8 +16,17 @@
     -fx-background-color : #fff;
 }
 .messagesList{
-    -fx-background-color : #6ec071;
+    -fx-background-color : #fff;
 }
 .childPane{
     -fx-background-color: #fff;
+}
+.messagesHeader{
+    -fx-background-color: #d3d3d3;
+}
+.MessageContentHeader{
+    -fx-background-color: #d3d3d3;
+}
+.backToMessages_btn{
+    -fx-background-color: #003d00;
 }
